@@ -45,9 +45,9 @@ function Hyperlinks:OnEnable()
 
   Core:Subscribe(HYPERLINK_CLICK, function (payload)
     local link, text, button = unpack(payload)
-    -- Use global reference in case some addon has hooked into it for custom
-    -- hyperlinks (e.g. Mythic Dungeon Tools, Prat)
-    _G.SetItemRef(link, text, button)
+    -- using SetItemRef breaks custom links
+    ChatFrame_OnHyperlinkShow(self, link, text, button)
+    -- _G.SetItemRef(link, text, button)
   end)
 
   Core:Subscribe(HYPERLINK_ENTER, function (payload)
